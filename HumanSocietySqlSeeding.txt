@@ -32,11 +32,20 @@ INSERT INTO Clients VALUES ('Donald','Driver','DD','DonaldDuck', 2,'DDduck@yahoo
 INSERT INTO Clients VALUES ('David','LaGrange','dLG','dLG123', 1,'dlag@gmail.com');
 
 Animal Seeds
-INSERT INTO Animals VALUES ('Barkalounger', 50, 2, 'Lazy', 1, 1, 'Male','Not Adopted', 1,1,5);
-INSERT INTO Animals VALUES ('Fluffy', 12, 5, 'Energetic', 1, 0, 'Female','Not Adopted', 2,2,5);
-INSERT INTO Animals VALUES ('Bubbles', 1, 1, 'Quiet', 0, 1, 'Female','Not Adopted', 3,3,5);
-INSERT INTO Animals VALUES ('Pebbles', 5, 2, 'Loud', 0, 0, 'Male','Not Adopted', 4,4,5);
-INSERT INTO Animals VALUES ('Spike', 10, 3, 'Quiet', 1, 0, 'Male','Not Adopted', 5,5,5);
+INSERT INTO Animals VALUES ('Barkalounger', 50, 2, 'Lazy', 1, 1, 'Male','Not Adopted', 1,1,NULL);
+INSERT INTO Animals VALUES ('Fluffy', 12, 5, 'Energetic', 1, 0, 'Female','Not Adopted', 2,2,NULL);
+INSERT INTO Animals VALUES ('Bubbles', 1, 1, 'Quiet', 0, 1, 'Female','Not Adopted', 3,3,NULL);
+INSERT INTO Animals VALUES ('Pebbles', 5, 2, 'Loud', 0, 0, 'Male','Not Adopted', 4,4,NULL);
+INSERT INTO Animals VALUES ('Spike', 10, 3, 'Quiet', 1, 0, 'Male','Not Adopted', 5,5,NULL);
 
 Room Seeds
-
+INSERT INTO Rooms VALUES (101,6);
+INSERT INTO Rooms VALUES (102,7);
+INSERT INTO Rooms VALUES (103,8);
+INSERT INTO Rooms VALUES (104,9);
+INSERT INTO Rooms VALUES (105,10);
+INSERT INTO Rooms VALUES (106,NULL);
+INSERT INTO Rooms VALUES (107,NULL);
+INSERT INTO Rooms VALUES (108,NULL);
+INSERT INTO Rooms VALUES (109,NULL);
+INSERT INTO Rooms VALUES (110,NULL);
