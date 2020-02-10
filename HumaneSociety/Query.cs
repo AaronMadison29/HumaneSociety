@@ -193,7 +193,7 @@ namespace HumaneSociety
 
         internal static void GetEmployeeByEmployeeNumber(int? employeeNumber)
         {
-            UserInterface.DisplayEmploeeInfo(db.Employees.Where(x => x.EmployeeNumber == employeeNumber).SingleOrDefault());
+            UserInterface.DisplayEmployeeInfo(db.Employees.Where(x => x.EmployeeNumber == employeeNumber).SingleOrDefault());
         }
         internal static void UpdateEmployee(Employee employee)
         {
@@ -213,28 +213,90 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-            throw new NotImplementedException();
+            var animal = db.Animals.Where(x => x.AnimalId == id).SingleOrDefault();
+            UserInterface.DisplayAnimalInfo(animal);
+            return animal;
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            var animal = db.Animals.Where(x => x.AnimalId == animalId).SingleOrDefault();
+
+            foreach (KeyValuePair<int, string> element in updates)
+            {
+                switch (element.Key)
+                {
+                    case 1:
+                        animal.Category.Name = element.Value;
+                        break;
+                    case 2:
+                        animal.Name = element.Value;
+                        break;
+                    case 3:
+                        animal.Age = Convert.ToInt32(element.Value);
+                        break;
+                    case 4:
+                        animal.Demeanor = element.Value;
+                        break;
+                    case 5:
+                        animal.KidFriendly = element.Value == "true" ? true: false;
+                        break;
+                    case 6:
+                        animal.PetFriendly = element.Value == "true" ? true : false;
+                        break;
+                    case 7:
+                        animal.Weight = Convert.ToInt32(element.Value);
+                        break;
+                    case 8:
+                        animal.AnimalId = Convert.ToInt32(element.Value);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.DeleteOnSubmit(db.Animals.Where(x => x.AnimalId == animal.AnimalId).SingleOrDefault());
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            throw new NotImplementedException();
+
+            foreach (KeyValuePair<int, string> element in updates)
+            {
+                switch (element.Key)
+                {
+                    case 1:
+                        return db.Animals.Where(x => x.Category.Name == element.Value);
+                    case 2:
+                        return db.Animals.Where(x => x.Name == element.Value);
+                    case 3:
+                        return db.Animals.Where(x => x.Age == Convert.ToInt32(element.Value));
+                    case 4:
+                        return db.Animals.Where(x => x.Demeanor == element.Value);
+                    case 5:
+                        return db.Animals.Where(x => x.KidFriendly.ToString() == element.Value);
+                    case 6:
+                        return db.Animals.Where(x => x.PetFriendly.ToString() == element.Value);
+                    case 7:
+                        return db.Animals.Where(x => x.Weight == Convert.ToInt32(element.Value));
+                    case 8:
+                        return db.Animals.Where(x => x.AnimalId == Convert.ToInt32(element.Value));
+                    default:
+                        break;
+                }
+            }
+            return null;
         }
          
         // TODO: Misc Animal Things

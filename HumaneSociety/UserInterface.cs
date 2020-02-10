@@ -92,7 +92,7 @@ namespace HumaneSociety
             }
         }
 
-        internal static void DisplayEmploeeInfo(Employee employee)
+        internal static void DisplayEmployeeInfo(Employee employee)
         {
             Console.Clear();
             Console.WriteLine($"Employee data for employee {employee.EmployeeNumber}: ");
