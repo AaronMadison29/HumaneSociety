@@ -5,3 +5,9 @@ INSERT INTO Categories VALUES ('Fish');
 INSERT INTO Categories VALUES ('Bird');
 INSERT INTO Categories VALUES ('Lizard');
 
+DietPlan Seeds
+INSERT INTO DietPlans VALUES ('Carnivore', 'Meat', 3);
+INSERT INTO DietPlans VALUES ('Slimming', 'Seafood', 1);
+INSERT INTO DietPlans VALUES ('Normal', 'Pellets', 2);
+INSERT INTO DietPlans VALUES ('Peckish', 'Seeds', 1);
+INSERT INTO DietPlans VALUES ('Herbivore', 'Vegetables', 2);
