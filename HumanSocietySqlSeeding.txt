@@ -19,7 +19,19 @@ INSERT INTO Employees VALUES ('Pete','Davidson','pdavidson','snl4lyfe', 16,'pdav
 INSERT INTO Employees VALUES ('Brett','Johnson','bjohnson','devCode', 7,'bjohnson@yahoo.com');
 INSERT INTO Employees VALUES ('Nevin','Seibel','nseibel','FlamanaBro4',9,'nseibel@gmail.com');
 
+Address Seeds
+INSERT INTO Addresses Values ('313 North Plankinton Avenue #209', 'Milwaukee', 49, 53203);
+INSERT INTO Addresses Values ('1265 Lombardi Avenue', 'Green Bay', 49, 54304);
+
+
 Client Seeds
+INSERT INTO Clients VALUES ('Michael','Terrill','abaird','QwertY123',1,'mterrill@gmail.com');
+INSERT INTO Clients VALUES ('Aaron','Rodgers','arodgers','danica', 2,'AAron@greenbaypackers.com');
+INSERT INTO Clients VALUES ('Jordy','Nelson','Nelson','bestWRGB', 2,'jnelson@greenbaypackers.com');
+INSERT INTO Clients VALUES ('Donald','Driver','DD','DonaldDuck', 2,'DDduck@yahoo.com');
+INSERT INTO Clients VALUES ('David','LaGrange','dLG','dLG123', 1,'dlag@gmail.com');
+
+Room Seeds
 
 
 Animal Seeds
