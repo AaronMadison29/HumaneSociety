@@ -199,6 +199,7 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
+            // Start here after database is seeded?
             throw new NotImplementedException();
         }
         
