@@ -25,7 +25,7 @@ INSERT INTO Addresses Values ('1265 Lombardi Avenue', 'Green Bay', 49, 54304);
 
 
 Client Seeds
-INSERT INTO Clients VALUES ('Michael','Terrill','abaird','QwertY123',1,'mterrill@gmail.com');
+INSERT INTO Clients VALUES ('Michael','Terrill','MT','QwertY123',1,'mterrill@gmail.com');
 INSERT INTO Clients VALUES ('Aaron','Rodgers','arodgers','danica', 2,'AAron@greenbaypackers.com');
 INSERT INTO Clients VALUES ('Jordy','Nelson','Nelson','bestWRGB', 2,'jnelson@greenbaypackers.com');
 INSERT INTO Clients VALUES ('Donald','Driver','DD','DonaldDuck', 2,'DDduck@yahoo.com');
@@ -39,11 +39,11 @@ INSERT INTO Animals VALUES ('Pebbles', 5, 2, 'Loud', 0, 0, 'Male','Not Adopted',
 INSERT INTO Animals VALUES ('Spike', 10, 3, 'Quiet', 1, 0, 'Male','Not Adopted', 5,5,NULL);
 
 Room Seeds
-INSERT INTO Rooms VALUES (101,6);
-INSERT INTO Rooms VALUES (102,7);
-INSERT INTO Rooms VALUES (103,8);
-INSERT INTO Rooms VALUES (104,9);
-INSERT INTO Rooms VALUES (105,10);
+INSERT INTO Rooms VALUES (101,1);
+INSERT INTO Rooms VALUES (102,2);
+INSERT INTO Rooms VALUES (103,3);
+INSERT INTO Rooms VALUES (104,4);
+INSERT INTO Rooms VALUES (105,5);
 INSERT INTO Rooms VALUES (106,NULL);
 INSERT INTO Rooms VALUES (107,NULL);
 INSERT INTO Rooms VALUES (108,NULL);
