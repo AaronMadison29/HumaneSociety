@@ -162,7 +162,6 @@ namespace HumaneSociety
 
 
         //// TODO Items: ////
-        // Start here
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
@@ -344,12 +343,20 @@ namespace HumaneSociety
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            throw new NotImplementedException();
+            var shots = db.AnimalShots.Where(x => x.Animal == animal);
+            return shots;
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            throw new NotImplementedException();
+            AnimalShot animalShot = new AnimalShot();
+            Shot shot = new Shot();
+            shot.Name = shotName;
+            animalShot.Shot = shot;
+            animalShot.Animal = animal;
+            db.AnimalShots.InsertOnSubmit(animalShot);
+            db.Shots.InsertOnSubmit(shot);
+            db.SubmitChanges();
         }
     }
 }
