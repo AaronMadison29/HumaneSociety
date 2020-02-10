@@ -385,6 +385,7 @@ namespace HumaneSociety
             AnimalShot animalShot = new AnimalShot();
             Shot shot = new Shot();
             shot.Name = shotName;
+            animalShot.DateReceived = DateTime.Now;
             animalShot.Shot = shot;
             animalShot.Animal = animal;
             db.AnimalShots.InsertOnSubmit(animalShot);
