@@ -11,3 +11,16 @@ INSERT INTO DietPlans VALUES ('Slimming', 'Seafood', 1);
 INSERT INTO DietPlans VALUES ('Normal', 'Pellets', 2);
 INSERT INTO DietPlans VALUES ('Peckish', 'Seeds', 1);
 INSERT INTO DietPlans VALUES ('Herbivore', 'Vegetables', 2);
+
+Employee Seeds
+INSERT INTO Employees VALUES ('Andrew','Baird','abaird','QwertY123',1,'abaird@gmail.com');
+INSERT INTO Employees VALUES ('Aaron','Madison','amadison','Password', 5,'amadison@gmail.com');
+INSERT INTO Employees VALUES ('Pete','Davidson','pdavidson','snl4lyfe', 16,'pdavidson@hotmail.com');
+INSERT INTO Employees VALUES ('Brett','Johnson','bjohnson','devCode', 7,'bjohnson@yahoo.com');
+INSERT INTO Employees VALUES ('Nevin','Seibel','nseibel','FlamanaBro4',9,'nseibel@gmail.com');
+
+Client Seeds
+
+
+Animal Seeds
+
