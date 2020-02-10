@@ -92,6 +92,18 @@ namespace HumaneSociety
             }
         }
 
+        internal static void DisplayEmploeeInfo(Employee employee)
+        {
+            Console.Clear();
+            Console.WriteLine($"Employee data for employee {employee.EmployeeNumber}: ");
+            Console.WriteLine($"Name: {employee.FirstName} {employee.LastName}");
+            Console.WriteLine($"Username: {employee.UserName}");
+            Console.WriteLine($"Email: {employee.Email}");
+            Console.WriteLine($"Password: {employee.Password}");
+            Console.WriteLine($"ID: {employee}");
+            Console.ReadLine();
+        }
+
         internal static int GetIntegerData()
         {
             try

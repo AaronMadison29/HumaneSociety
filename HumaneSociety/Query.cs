@@ -157,7 +157,7 @@ namespace HumaneSociety
         {
             Employee employeeWithUserName = db.Employees.Where(e => e.UserName == userName).FirstOrDefault();
 
-            return employeeWithUserName == null;
+            return employeeWithUserName != null;
         }
 
 
@@ -166,7 +166,48 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
+             switch(crudOperation)
+            {
+                case "create":
+                    AddEmployee(employee);
+                    return;
+                case "read":
+                    GetEmployeeByEmployeeNumber(employee.EmployeeNumber);
+                    return;
+                case "update":
+                    UpdateEmployee(employee);
+                    return;
+                case "delete":
+                    RemoveEmployee(employee);
+                    return;
+                default:
+                    return;
+            }
+        }
+
+        internal static void AddEmployee(Employee employee)
+        {
+            db.Employees.InsertOnSubmit(employee);
+            db.SubmitChanges();
+        }
+
+        internal static void GetEmployeeByEmployeeNumber(int? employeeNumber)
+        {
+            UserInterface.DisplayEmploeeInfo(db.Employees.Where(x => x.EmployeeNumber == employeeNumber).SingleOrDefault());
+        }
+        internal static void UpdateEmployee(Employee employee)
+        {
+            var result = db.Employees.Where(x => x.EmployeeNumber == employee.EmployeeNumber).SingleOrDefault();
+            result.Email = employee.Email;
+            result.FirstName = employee.FirstName;
+            result.LastName = employee.LastName;
+
+            db.SubmitChanges();
+        }
+        internal static void RemoveEmployee(Employee employee)
+        {
+            db.Employees.DeleteOnSubmit(db.Employees.Where(x => x.EmployeeNumber == employee.EmployeeNumber).SingleOrDefault());
+            db.SubmitChanges();
         }
 
         // TODO: Animal CRUD Operations
