@@ -10,6 +10,7 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
+            CSVReader.AddAnimalsFromFile(CSVReader.ReadFile());
             PointOfEntry.Run();
         }
     }
