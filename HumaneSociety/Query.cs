@@ -271,33 +271,43 @@ namespace HumaneSociety
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
 
+            IQueryable<Animal> animals = db.Animals;
+
             foreach (KeyValuePair<int, string> element in updates)
             {
                 switch (element.Key)
                 {
                     case 1:
-                        return db.Animals.Where(x => x.Category.Name == element.Value);
+                        animals = animals.Where(x => x.Category.Name == element.Value);
+                        break;
                     case 2:
-                        return db.Animals.Where(x => x.Name == element.Value);
+                        animals = animals.Where(x => x.Name == element.Value);
+                        break;
                     case 3:
-                        return db.Animals.Where(x => x.Age == Convert.ToInt32(element.Value));
+                        animals = animals.Where(x => x.Age == Convert.ToInt32(element.Value));
+                        break;
                     case 4:
-                        return db.Animals.Where(x => x.Demeanor == element.Value);
+                        animals = animals.Where(x => x.Demeanor == element.Value);
+                        break;
                     case 5:
-                        return db.Animals.Where(x => x.KidFriendly.ToString() == element.Value);
+                        animals = animals.Where(x => x.KidFriendly.ToString() == element.Value);
+                        break;
                     case 6:
-                        return db.Animals.Where(x => x.PetFriendly.ToString() == element.Value);
+                        animals = animals.Where(x => x.PetFriendly.ToString() == element.Value);
+                        break;
                     case 7:
-                        return db.Animals.Where(x => x.Weight == Convert.ToInt32(element.Value));
+                        animals = animals.Where(x => x.Weight == Convert.ToInt32(element.Value));
+                        break;
                     case 8:
-                        return db.Animals.Where(x => x.AnimalId == Convert.ToInt32(element.Value));
+                        animals = animals.Where(x => x.AnimalId == Convert.ToInt32(element.Value));
+                        break;
                     default:
                         break;
                 }
             }
-            return null;
+            return animals;
         }
-         
+
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
@@ -314,9 +324,21 @@ namespace HumaneSociety
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            var dietplan = db.Categories.Where(x => x.Name == dietPlanName).SingleOrDefault();  // This gets it to of class Category
-            var dietplanId = dietplan.CategoryId; // Need to access the category id of that category 
-            return dietplanId;
+            switch(dietPlanName)
+            {
+                case "Carnivore":
+                    return 1;
+                case "Slimming":
+                    return 2;
+                case "Normal":
+                    return 3;
+                case "Peckish":
+                    return 4;
+                case "Herbivore":
+                    return 5;
+                default:
+                    return 0;
+            }
         }
 
         // TODO: Adoption CRUD Operations
@@ -385,10 +407,10 @@ namespace HumaneSociety
             AnimalShot animalShot = new AnimalShot();
             Shot shot = new Shot();
             shot.Name = shotName;
+            animalShot.DateReceived = DateTime.Now;
             animalShot.Shot = shot;
             animalShot.Animal = animal;
             db.AnimalShots.InsertOnSubmit(animalShot);
-            db.Shots.InsertOnSubmit(shot);
             db.SubmitChanges();
         }
     }
