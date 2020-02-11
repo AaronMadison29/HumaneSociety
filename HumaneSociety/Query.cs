@@ -327,14 +327,19 @@ namespace HumaneSociety
             switch(dietPlanName)
             {
                 case "Carnivore":
+                case "meat":
                     return 1;
                 case "Slimming":
+                case "seafood":
                     return 2;
                 case "Normal":
+                case "pellets":
                     return 3;
                 case "Peckish":
+                case "seeds":
                     return 4;
                 case "Herbivore":
+                case "lettuce":
                     return 5;
                 default:
                     return 0;
