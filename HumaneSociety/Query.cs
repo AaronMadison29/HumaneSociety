@@ -419,26 +419,28 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            Shot shot = new Shot();
-            shot.Name = shotName;
-            db.Shots.InsertOnSubmit(shot);
-
-            db.SubmitChanges();
+            var shotFromDB = db.Shots.Where(x => x.Name == shotName).SingleOrDefault();
+            Shot shot;
+            if (shotFromDB == null)
+            {
+                shot = new Shot();
+                shot.Name = shotName;
+                db.Shots.InsertOnSubmit(shot);
+                db.SubmitChanges();
+            }
+            else
+            {
+                shot = shotFromDB;
+            }
 
             var animalShot = new AnimalShot();
-
             animalShot.DateReceived = DateTime.Now;
             animalShot.AnimalId = animal.AnimalId;
             animalShot.ShotId = shot.ShotId;
             db.AnimalShots.InsertOnSubmit(animalShot);
-
             db.SubmitChanges();
         }
 
-
-
-
-        
         public static List<List<string>> ReadFile()
         {
             StreamReader sr = new StreamReader("C:\\Users\\aaron\\Desktop\\DevCodeCamp\\Projects\\HumaneSociety\\animals.csv");
@@ -489,10 +491,10 @@ namespace HumaneSociety
                             newAnimal.Demeanor = animalList[i][j];
                             break;
                         case 5:
-                            newAnimal.KidFriendly = animalList[i][j] == "0" ? false: true;
+                            newAnimal.KidFriendly = animalList[i][j] == "0" ? false : true;
                             break;
                         case 6:
-                            newAnimal.PetFriendly = animalList[i][j] == "0" ? false: true;
+                            newAnimal.PetFriendly = animalList[i][j] == "0" ? false : true;
                             break;
                         case 7:
                             newAnimal.Gender = animalList[i][j];
