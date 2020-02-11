@@ -342,7 +342,7 @@ namespace HumaneSociety
                 case "lettuce":
                     return 5;
                 default:
-                    return 0;
+                    return 3;
             }
         }
 
