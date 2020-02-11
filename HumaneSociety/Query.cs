@@ -352,7 +352,6 @@ namespace HumaneSociety
             newAdoption.ApprovalStatus = "Pending";
             ClientAdoptionSetup(client, newAdoption);
             AnimalAdoptionSetup(animal, newAdoption);
-            db.Adoptions.InsertOnSubmit(newAdoption);
             db.SubmitChanges();
         }
 
@@ -404,13 +403,19 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            AnimalShot animalShot = new AnimalShot();
             Shot shot = new Shot();
             shot.Name = shotName;
+            db.Shots.InsertOnSubmit(shot);
+
+            db.SubmitChanges();
+
+            var animalShot = new AnimalShot();
+
             animalShot.DateReceived = DateTime.Now;
-            animalShot.Shot = shot;
-            animalShot.Animal = animal;
+            animalShot.AnimalId = animal.AnimalId;
+            animalShot.ShotId = shot.ShotId;
             db.AnimalShots.InsertOnSubmit(animalShot);
+
             db.SubmitChanges();
         }
     }
