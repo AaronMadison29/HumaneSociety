@@ -10,6 +10,7 @@ namespace HumaneSociety
     {
         public static void Run()
         {
+            Query.AddAnimalsFromFile(Query.ReadFile());
             List<string> options = new List<string>() { "Hello welcome to the Humane Society! Are you a(n):", "1. Employee", "2. Customer" };
             UserInterface.DisplayUserOptions(options);
             string userInput = UserInterface.GetUserInput();

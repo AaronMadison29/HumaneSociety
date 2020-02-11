@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace HumaneSociety
 {
@@ -324,21 +326,9 @@ namespace HumaneSociety
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            switch(dietPlanName)
-            {
-                case "Carnivore":
-                    return 1;
-                case "Slimming":
-                    return 2;
-                case "Normal":
-                    return 3;
-                case "Peckish":
-                    return 4;
-                case "Herbivore":
-                    return 5;
-                default:
-                    return 0;
-            }
+            var dietPlan = db.DietPlans.Where(x => x.Name == dietPlanName).SingleOrDefault();
+            var dietPlanID = dietPlan.DietPlanId;
+            return dietPlanID;
         }
 
         // TODO: Adoption CRUD Operations
@@ -349,7 +339,9 @@ namespace HumaneSociety
             newAdoption.ClientId = client.ClientId;
             newAdoption.Animal = animal;
             newAdoption.Client = client;
+            newAdoption.AdoptionFee = 75;
             newAdoption.ApprovalStatus = "Pending";
+            newAdoption.PaymentCollected = false;
             ClientAdoptionSetup(client, newAdoption);
             AnimalAdoptionSetup(animal, newAdoption);
             db.SubmitChanges();
@@ -379,11 +371,13 @@ namespace HumaneSociety
             {
                 result.ApprovalStatus = "Approved";
                 adoption.Animal.AdoptionStatus = "Approved";
+                adoption.PaymentCollected = true;
                 db.SubmitChanges();
             }
             else
             {
                 result.ApprovalStatus = "Denied";
+                adoption.Animal.AdoptionStatus = "Not Adopted";
                 db.SubmitChanges();
             }
         }
@@ -397,7 +391,7 @@ namespace HumaneSociety
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            var shots = db.AnimalShots.Where(x => x.Animal == animal);
+            var shots = db.AnimalShots.Where(x => x.Animal.AnimalId == animal.AnimalId);
             return shots;
         }
 
@@ -417,6 +411,89 @@ namespace HumaneSociety
             db.AnimalShots.InsertOnSubmit(animalShot);
 
             db.SubmitChanges();
+        }
+
+
+
+
+        
+        public static List<List<string>> ReadFile()
+        {
+            StreamReader sr = new StreamReader("C:\\Users\\aaron\\Desktop\\DevCodeCamp\\Projects\\HumaneSociety\\animals.csv");
+            Regex input = new Regex(@"\d+|\w+");
+
+
+            string line;
+            List<List<string>> list = new List<List<string>>();
+
+            while ((line = sr.ReadLine()) != null)
+            {
+                list.Add(line.Split(',').ToList());
+            }
+            for (int j = 0; j < list.Count; j++)
+            {
+                for (int i = 0; i < list[j].Count; i++)
+                {
+                    var match = input.Match(list[j][i]);
+                    list[j][i] = match.ToString();
+                }
+            }
+            sr.Close();
+
+            return list;
+        }
+
+        public static void AddAnimalsFromFile(List<List<string>> animalList)
+        {
+
+            for (int i = 0; i < animalList.Count; i++)
+            {
+                Animal newAnimal = new Animal();
+
+                for (int j = 0; j < animalList[i].Count; j++)
+                {
+                    switch (j + 1)
+                    {
+                        case 1:
+                            newAnimal.Name = animalList[i][j];
+                            break;
+                        case 2:
+                            newAnimal.Weight = Convert.ToInt32(animalList[i][j]);
+                            break;
+                        case 3:
+                            newAnimal.Age = Convert.ToInt32(animalList[i][j]);
+                            break;
+                        case 4:
+                            newAnimal.Demeanor = animalList[i][j];
+                            break;
+                        case 5:
+                            newAnimal.KidFriendly = animalList[i][j] == "0" ? false: true;
+                            break;
+                        case 6:
+                            newAnimal.PetFriendly = animalList[i][j] == "0" ? false: true;
+                            break;
+                        case 7:
+                            newAnimal.Gender = animalList[i][j];
+                            break;
+                        case 8:
+                            newAnimal.AdoptionStatus = animalList[i][j];
+                            break;
+                        case 9:
+                            newAnimal.CategoryId = animalList[i][j] == "null" ? (int?)null : Convert.ToInt32(animalList[i][j]);
+                            break;
+                        case 10:
+                            newAnimal.DietPlanId = animalList[i][j] == "null" ? (int?)null : Convert.ToInt32(animalList[i][j]);
+                            break;
+                        case 11:
+                            newAnimal.EmployeeId = animalList[i][j] == "null" ? (int?)null : Convert.ToInt32(animalList[i][j]);
+                            break;
+
+                    }
+                }
+
+                db.Animals.InsertOnSubmit(newAnimal);
+                db.SubmitChanges();
+            }
         }
     }
 }
